@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Frases</title>
+    <!-- Incluir Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="myapp" class="container mt-4">
+        <h1 class="mb-4">Lista de Frases</h1>
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Frase</th>
+                    <th>Autor</th>
+                    <th>Funciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in frases" :key="index">
+                    <td>{{ index + 1 }}</td>
+                    <td>
+                        <div v-if="editIndex === index">
+                            <input v-model="item.frase" class="form-control" />
+                        </div>
+                        <div v-else>
+                            {{ item.frase }}
+                        </div>
+                    </td>
+                    <td>
+                        <div v-if="editIndex === index">
+                            <input v-model="item.autor" class="form-control" />
+                        </div>
+                        <div v-else>
+                            {{ item.autor }}
+                        </div>
+                    </td>
+                    <td>
+                        <button v-if="editIndex === index" @click="guardarEdicion" class="btn btn-success btn-sm">Guardar</button>
+                        <button v-else @click="iniciarEdicion(index)" class="btn btn-primary btn-sm me-2">Editar</button>
+                        <button @click="eliminarFrase(index)" class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+    <!-- Incluir Bootstrap JS  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
